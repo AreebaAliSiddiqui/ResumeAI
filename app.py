@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template , request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
+from pypdf import PdfReader
 
 app = Flask(__name__)
 app.secret_key = 'riva-1111'  # Replace
@@ -42,6 +43,12 @@ def index():
                 file_path=os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(file_path)
                 print(f"File saved to: {file_path}")
+                # Read the PDF file
+                reader = PdfReader(file_path)
+                print(f"Number of pages: {len(reader.pages)}")
+                page = reader.pages[0]
+                text = page.extract_text()
+                print(f"Extracted text: {text}")
             else:
                  print("No valid file uploaded.")
 
@@ -49,3 +56,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
