@@ -3,6 +3,11 @@ from flask import render_template , request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
 
 app = Flask(__name__)
 app.secret_key = 'riva-1111'  # Replace
