@@ -4,9 +4,43 @@ import os
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from google import genai
+from google.genai import types
 from dotenv import load_dotenv
+from google.genai import Client
+from urllib import response
 
 load_dotenv()
+
+client= genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+client=Client()
+response_1=client.models.generate_content(
+     model=MODEL_ID,
+     contents="Hello"
+
+
+response_2=client.models.generate_content
+    model=MODEL_ID
+    contents='Ask a question about the text you provided',)
+
+
+response_1=client.models.generate_content(
+     model='gemini-2.5-flash',
+     contents='Why is the sky blue'
+
+)
+print(response.text)
+
+file = client.files.upload(file='a11.txt')
+response = client.models.generate_content(
+    model='gemini-2.5-flash',
+    contents=['Could you summarize this file?', file]
+)
+print(response.text)
+client.close()
+
+
+
 api_key = os.getenv("GEMINI_API_KEY")
 
 app = Flask(__name__)
