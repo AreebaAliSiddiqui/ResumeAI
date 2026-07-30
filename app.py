@@ -4,44 +4,13 @@ import os
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from google import genai
-from google.genai import types
 from dotenv import load_dotenv
-from google.genai import Client
-from urllib import response
+
+
 
 load_dotenv()
-
 client= genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-client=Client()
-response_1=client.models.generate_content(
-     model=MODEL_ID,
-     contents="Hello"
-
-
-response_2=client.models.generate_content
-    model=MODEL_ID
-    contents='Ask a question about the text you provided',)
-
-
-response_1=client.models.generate_content(
-     model='gemini-2.5-flash',
-     contents='Why is the sky blue'
-
-)
-print(response.text)
-
-file = client.files.upload(file='a11.txt')
-response = client.models.generate_content(
-    model='gemini-2.5-flash',
-    contents=['Could you summarize this file?', file]
-)
-print(response.text)
-client.close()
-
-
-
-api_key = os.getenv("GEMINI_API_KEY")
 
 app = Flask(__name__)
 app.secret_key = 'riva-1111'  # Replace
@@ -58,10 +27,30 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# ----- Gemini Functions -----
+
+def generate_resume(resume_text, job_description):
+ prompt=(  
+    f"You are a professional resume writer.Here is the candidate's resume:\n{resume_text}\n"
+    f"And this job description: \n{job_description}\n"
+    f"Rewrite the resume so it better matches the job description while remaining truthful."
+    )
+
+ response = client.models.generate_content(
+    model='gemini-3.6-flash',
+    contents=prompt
+    )
+ return response.text
+
+
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+        print("=== index() called ===")
         if request.method == 'POST':
+            print("=== POST request ===")
             # check if the post request has the file part
             if 'resume' not in request.files:
                 flash('No file part')
@@ -91,6 +80,10 @@ def index():
             else:
                  print("No valid file uploaded.")
 
+            resume = generate_resume(text, job_description)
+            print(resume)
+
+        
         return render_template('index.html')
 
 if __name__ == '__main__':
