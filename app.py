@@ -44,8 +44,6 @@ def generate_resume(resume_text, job_description):
 
 
 
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
         print("=== index() called ===")
@@ -84,7 +82,7 @@ def index():
             print(resume)
 
         
-        return render_template('index.html')
+        return render_template('index.html', resume=resume if 'resume' in locals() else None)
 
 if __name__ == '__main__':
     app.run(debug=True)
