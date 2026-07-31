@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}">
         <meta charset="utf-8"/>
-        <title>ResumeAI</title>
+       <title> ResumeAI</title>
     </head>
     <body>
         <h1>ResumeAI</h1>
@@ -17,5 +17,11 @@
 
             <button type="submit">Generate Resume</button>
         </form>
+          <output id="result">
+                {% if resume %}
+                    <h2>Generated Resume:</h2>
+                    <pre>{{ resume }}</pre>
+                {% endif %}
+            </output>
     </body>
 </html>
