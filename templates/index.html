@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}">
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
         <meta charset="utf-8"/>
        <title> ResumeAI</title>
     </head>
@@ -15,7 +16,7 @@
             <label for="job_description">Job Description</label><br>
             <textarea id="job_description" name="job_description" rows="4" cols="50"></textarea><br><br>
 
-            <button type="submit">Generate Resume</button>
+            <button id="generate-btn" type="submit">Generate Resume</button>
         </form>
           <output id="result">
                 {% if resume %}
