@@ -31,9 +31,17 @@ def allowed_file(filename):
 
 def generate_resume(resume_text, job_description):
  prompt=(  
-    f"You are a professional resume writer.Here is the candidate's resume:\n{resume_text}\n"
+    f"ROLE:You are a professional, world class resume writer. INPUT: Here is the candidate's resume:\n{resume_text}\n"
     f"And this job description: \n{job_description}\n"
-    f"Rewrite the resume so it better matches the job description while remaining truthful."
+    f"TASK:Rewrite the resume so it better matches the job description for example reorder bullet points,emphasize relevant projects,prioritize matching skills while remaining truthful."
+    f"RULES:Don't invent experience. "
+    f"Improve ATS compatibility to maximize the candidate's chances of passing an Applicant Tracking System "
+    f"Use bullet points. "
+    f"Improve grammar. "
+    f"Preserve all important experience, education, certifications, and technical skills unless they are clearly irrelevant. "
+    f"Match the job description. "
+    f"Keep professional tone. "
+    f"OUTPUT: Return plain text only."
     )
 
  response = client.models.generate_content(
