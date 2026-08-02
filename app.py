@@ -1,3 +1,4 @@
+from urllib import response
 from flask import Flask
 from flask import render_template , request, redirect, url_for, flash
 import os
@@ -43,13 +44,17 @@ def generate_resume(resume_text, job_description):
     f"Keep professional tone. "
     f"OUTPUT: Return plain text only."
     )
-
- response = client.models.generate_content(
+try:
+    response = client.models.generate_content(
     model='gemini-3.6-flash',
     contents=prompt
     )
- return response.text
+    return response.text
 
+except Exception as e:
+    print(f"Error generating resume: {e}")
+    return "Error generating resume. Please try again later."
+       
 
 
 @app.route('/', methods=['GET', 'POST'])
