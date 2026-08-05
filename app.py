@@ -1,11 +1,11 @@
 from flask import Flask
-from flask import render_template , request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, send_file
 import os
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from google import genai
 from dotenv import load_dotenv
-from flask import send_file
+from docx import Document
 
 
 
@@ -91,17 +91,21 @@ def index():
                  print("No valid file uploaded.")
 
             resume = generate_resume(text, job_description)
-            with open('response.txt', 'w', encoding='utf-8') as file:
-                file.write(resume)
-            
+           # with open('response.txt', 'w', encoding='utf-8') as file:
+           #     file.write(resume)
+
+            doc = Document()
+            doc.add_paragraph(resume)
+            doc.save('response.docx')
             print(resume)
         return render_template('index.html', resume=resume)
 
 @app.route('/download_resume', methods=['GET'])   
 def download_resume():
     return send_file( 
-        'response.txt',
-         as_attachment=True
+        'response.docx',
+         as_attachment=True,
+         download_name="ResumeAI_Resume.docx"
         )
 if __name__ == '__main__':
     app.run(debug=True)
