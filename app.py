@@ -1,4 +1,3 @@
-from urllib import response
 from flask import Flask
 from flask import render_template , request, redirect, url_for, flash
 import os
@@ -6,6 +5,7 @@ from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from google import genai
 from dotenv import load_dotenv
+from flask import send_file
 
 
 
@@ -31,7 +31,7 @@ def allowed_file(filename):
 # ----- Gemini Functions -----
 
 def generate_resume(resume_text, job_description):
- prompt=(  
+    prompt=(  
     f"ROLE:You are a professional, world class resume writer. INPUT: Here is the candidate's resume:\n{resume_text}\n"
     f"And this job description: \n{job_description}\n"
     f"TASK:Rewrite the resume so it better matches the job description for example reorder bullet points,emphasize relevant projects,prioritize matching skills while remaining truthful."
@@ -44,21 +44,22 @@ def generate_resume(resume_text, job_description):
     f"Keep professional tone. "
     f"OUTPUT: Return plain text only."
     )
-try:
-    response = client.models.generate_content(
-    model='gemini-3.6-flash',
-    contents=prompt
-    )
-    return response.text
+    try:
+        response = client.models.generate_content(
+            model='gemini-3.6-flash',
+            contents=prompt
+        )
+        return response.text
 
-except Exception as e:
-    print(f"Error generating resume: {e}")
-    return "Error generating resume. Please try again later."
+    except Exception as e:
+        print(f"Error generating resume: {e}")
+        return "Error generating resume. Please try again later."
        
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+        resume = None
         print("=== index() called ===")
         if request.method == 'POST':
             print("=== POST request ===")
@@ -70,9 +71,7 @@ def index():
             file = request.files['resume']
             job_description = request.form.get('job_description', '')
             print(f"Job Description: {job_description}")
-            # if user does not select file, browser also
-            # submit an empty part without filename
-
+            
             if file.filename == '':
                 flash('No selected file')
                 return redirect(request.url)
@@ -92,11 +91,18 @@ def index():
                  print("No valid file uploaded.")
 
             resume = generate_resume(text, job_description)
+            with open('response.txt', 'w', encoding='utf-8') as file:
+                file.write(resume)
+            
             print(resume)
+        return render_template('index.html', resume=resume)
 
-        
-        return render_template('index.html', resume=resume if 'resume' in locals() else None)
-
+@app.route('/download_resume', methods=['GET'])   
+def download_resume():
+    return send_file( 
+        'response.txt',
+         as_attachment=True
+        )
 if __name__ == '__main__':
     app.run(debug=True)
 
