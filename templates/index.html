@@ -16,13 +16,18 @@
             <textarea id="job_description" name="job_description" rows="4" cols="50"></textarea><br><br>
 
             <button id="generate-btn" type="submit">Generate Resume</button>
+          
         </form>
+       
           <output id="result">
                 {% if resume %}
                     <h2>Generated Resume:</h2>
                     <pre>{{ resume }}</pre>
+                    <form action="{{url_for('download_resume')}}" method="get">
+                    <button type="submit">Download Resume</button></form>
                 {% endif %}
             </output>
+       
             <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
