@@ -16,6 +16,23 @@ body {
     border-radius: 10px;
    
 }
+
+.hero{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.hero h1{
+    color:#B9A6F5;
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#D8D6E8;
+    font-size:20px;
+    margin:0;
+}
 button {
     background-color: #B9A6F5;
     color: #1B2A52;

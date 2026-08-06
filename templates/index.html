@@ -6,8 +6,11 @@
        <title> ResumeAI</title>
     </head>
     <body>
+        <div class="container">
+        <div class="hero">
         <h1>ResumeAI</h1>
         <p>Welcome to ResumeAI, your AI-powered resume builder!</p>
+        </div>
         <form id="generate-form" enctype="multipart/form-data" action="{{ url_for('index') }}" method="post">    
             <label for="resume">Submit your Resume</label><br>
             <input type="file" id="resume" name="resume"><br><br>
@@ -29,5 +32,6 @@
             </output>
        
             <script src="{{ url_for('static', filename='script.js') }}"></script>
+            </div>
     </body>
 </html>
