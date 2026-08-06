@@ -45,3 +45,13 @@ label {
     margin-bottom: 8px;
     font-weight: bold;
 }
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
