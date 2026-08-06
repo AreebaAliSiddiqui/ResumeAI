@@ -55,3 +55,7 @@ textarea {
     box-sizing: border-box;
     margin-bottom: 20px;
 }
+input[type="file"] {
+    margin-bottom: 25px;
+    color: white;
+}
