@@ -18,12 +18,17 @@ body {
 }
 button {
     background-color: #B9A6F5;
-    color: #14213D;
+    color: #1B2A52;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition:all 0.3s ease-in-out;
+
+}
+#generate-btn:hover{
+    background-color: #6F62A6;
 }
 h1 {
     color: #B9A6F5;
