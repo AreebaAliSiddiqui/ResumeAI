@@ -1,9 +1,30 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
 .env
 
+# Uploads
 path/
 uploads/
+
+# Generated files
+response.txt
+response.docx
+
+# VS Code
+.vscode/
+
+# Type hints
 typings/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
