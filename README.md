@@ -139,12 +139,6 @@ Building ResumeAI helped me gain practical experience with:
 
 ---
 
-## 📸 Screenshot
-
-_Add a screenshot of the application here._
-
----
-
 ## ▶️ Running Locally
 
 Clone the repository:
@@ -180,5 +174,6 @@ http://127.0.0.1:5000
 ---
 
 ## 📜 License
+MIT License
 
-This project was built for learning, experimentation, and portfolio purposes.
+Copyright (c) 2026 Areeba Ali Siddiqui
