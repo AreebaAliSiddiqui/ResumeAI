@@ -34,3 +34,14 @@ h1 {
     color: #B9A6F5;
     font-size: 34px;
 }
+p {
+    color: #D8D6E8;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
