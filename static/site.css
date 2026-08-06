@@ -85,6 +85,10 @@ pre {
     white-space: pre-wrap;
     overflow-wrap: break-word;
 }
+#result{
+    margin-top:40px;
+}
+
 button {
     margin-top: 10px;
 }
