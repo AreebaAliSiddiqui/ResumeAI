@@ -8,8 +8,11 @@ body {
 .container {
     max-width: 800px;
     width: 100%;
+    background-color: #14213D;
+    color: white;
+    padding: 30px;
 }
 h1 {
-    color: blue;
+    color: #B9A6F5;
     font-size: 34px;
 }
